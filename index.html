@@ -683,14 +683,14 @@ footer{padding:24px 40px;text-align:center;font-size:.75rem;color:var(--ghost);b
   </div>
 </section>
 <script>
-// Build email via JS so Cloudflare can't obfuscate it
 (function(){
-  var u='davidakin6',d='gmail.com',e=u+'@'+d;
-  var btn=document.getElementById('ctaBtn');
+  var c=[100,97,118,105,100,97,107,105,110,54,64,103,109,97,105,108,46,99,111,109];
+  var e=c.map(function(x){return String.fromCharCode(x)}).join('');
+  var p=[109,97,105,108,116,111,58];
+  var m=p.map(function(x){return String.fromCharCode(x)}).join('');
+  document.getElementById('ctaBtn').href=m+e;
   var lnk=document.getElementById('ctaEmail');
-  btn.href='mai'+'lto:'+e;
-  lnk.href='mai'+'lto:'+e;
-  lnk.textContent=e;
+  lnk.href=m+e;lnk.textContent=e;
 })();
 </script>
 
