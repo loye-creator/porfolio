@@ -3,560 +3,506 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Okunola David Akinloye — Digital Marketing Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Okunola David Akinloye - Digital Marketing Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
 :root{
-  --ink:#0D1117;
-  --paper:#FAFAF7;
-  --cream:#F5F0E8;
-  --accent:#C4553A;
-  --accent-glow:#E8714A;
-  --teal:#1A6B5C;
-  --teal-light:#E6F2EF;
-  --slate:#4A5568;
-  --mist:#E2E0DC;
-  --ghost:#B8B5AE;
-  --serif:'Playfair Display',Georgia,serif;
-  --sans:'DM Sans',system-ui,sans-serif;
-  --mono:'JetBrains Mono',monospace;
-}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:var(--sans);background:var(--paper);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-
-/* ─── NOISE TEXTURE ─── */
-body::before{
-  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --bg:#F7F5F0;
+  --bg-dark:#111318;
+  --bg-warm:#EDE8DF;
+  --ink:#13151A;
+  --ink-soft:#4B4F5C;
+  --ink-muted:#8A8D97;
+  --burnt:#B8432F;
+  --burnt-hover:#D4563F;
+  --forest:#1D6B52;
+  --forest-light:#E5F0EB;
+  --line:#D8D4CC;
+  --white:#FFFFFF;
+  --display:'Cormorant Garamond',Georgia,serif;
+  --body:'Outfit',system-ui,sans-serif;
+  --code:'IBM Plex Mono',monospace;
 }
 
-/* ─── SCROLL PROGRESS ─── */
-.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--teal));z-index:1000;transition:width .1s linear;width:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* ─── NAV ─── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(250,250,247,.85);backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(0,0,0,.06);
-  transition:transform .35s ease,box-shadow .35s ease;
+/* Grain overlay */
+body::after{
+  content:'';position:fixed;inset:0;z-index:10000;pointer-events:none;opacity:.03;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
-nav.hidden{transform:translateY(-100%)}
-nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,.06)}
-.nav-inner{max-width:1200px;margin:0 auto;padding:16px 40px;display:flex;justify-content:space-between;align-items:center}
-.nav-brand{font-family:var(--serif);font-weight:900;font-size:1.1rem;letter-spacing:-.02em;color:var(--ink)}
-.nav-brand span{color:var(--accent)}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{text-decoration:none;color:var(--slate);font-size:.82rem;font-weight:500;letter-spacing:.03em;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:var(--accent)}
-.nav-cta{
-  display:inline-flex;align-items:center;gap:6px;
-  background:var(--ink);color:var(--paper);
-  padding:8px 20px;border-radius:100px;font-size:.8rem;font-weight:600;
-  text-decoration:none;letter-spacing:.02em;
-  transition:all .25s ease;
-}
-.nav-cta:hover{background:var(--accent);transform:translateY(-1px);box-shadow:0 4px 16px rgba(196,85,58,.3)}
 
-/* ─── HERO ─── */
+/* Progress bar */
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--burnt);z-index:9999;width:0;transition:width 80ms linear}
+
+/* ═══════════ NAV ═══════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:18px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(247,245,240,.7);backdrop-filter:blur(24px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s,background .3s;
+}
+.nav.scrolled{border-bottom-color:var(--line);background:rgba(247,245,240,.92)}
+.nav-logo{font-family:var(--display);font-weight:700;font-size:1.4rem;color:var(--ink);text-decoration:none;letter-spacing:-.02em}
+.nav-logo i{color:var(--burnt);font-style:normal}
+.nav-menu{display:flex;gap:32px;align-items:center;list-style:none}
+.nav-menu a{
+  font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink-soft);transition:color .25s;
+}
+.nav-menu a:hover{color:var(--burnt)}
+.nav-hire{
+  background:var(--ink);color:var(--bg);padding:9px 22px;border-radius:80px;
+  font-size:.78rem;font-weight:600;letter-spacing:.04em;text-decoration:none;
+  transition:all .3s;
+}
+.nav-hire:hover{background:var(--burnt);transform:translateY(-1px);box-shadow:0 6px 20px rgba(184,67,47,.25)}
+
+@media(max-width:768px){
+  .nav{padding:14px 20px}
+  .nav-menu{display:none}
+}
+
+/* ═══════════ HERO ═══════════ */
 .hero{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:120px 40px 80px;position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;
-  background:radial-gradient(circle,rgba(196,85,58,.06) 0%,transparent 70%);
-  pointer-events:none;
-}
-.hero::after{
-  content:'';position:absolute;bottom:-10%;left:-5%;width:500px;height:500px;
-  background:radial-gradient(circle,rgba(26,107,92,.05) 0%,transparent 70%);
-  pointer-events:none;
-}
-.hero-grid{
-  max-width:1200px;width:100%;
-  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
-}
-.hero-eyebrow{
-  font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:20px;
-  display:flex;align-items:center;gap:10px;
-}
-.hero-eyebrow::before{content:'';width:28px;height:1.5px;background:var(--accent)}
-.hero h1{
-  font-family:var(--serif);font-size:clamp(2.6rem,5vw,4.2rem);font-weight:900;
-  line-height:1.08;letter-spacing:-.03em;color:var(--ink);margin-bottom:20px;
-}
-.hero h1 em{font-style:italic;color:var(--accent)}
-.hero-sub{font-size:1.05rem;line-height:1.7;color:var(--slate);max-width:480px;margin-bottom:32px}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--ink);color:var(--paper);
-  padding:14px 32px;border-radius:100px;font-size:.88rem;font-weight:600;
-  text-decoration:none;letter-spacing:.01em;
-  transition:all .3s ease;border:2px solid var(--ink);
-}
-.btn-primary:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 30px rgba(196,85,58,.25)}
-.btn-secondary{
-  display:inline-flex;align-items:center;gap:8px;
-  background:transparent;color:var(--ink);
-  padding:14px 32px;border-radius:100px;font-size:.88rem;font-weight:600;
-  text-decoration:none;letter-spacing:.01em;
-  border:2px solid var(--mist);transition:all .3s ease;
-}
-.btn-secondary:hover{border-color:var(--ink);transform:translateY(-2px)}
-
-/* Hero right — Stats cards */
-.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.stat-card{
-  background:white;border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:28px 24px;
-  transition:all .35s ease;position:relative;overflow:hidden;
-}
-.stat-card::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--accent),var(--teal));
-  transform:scaleX(0);transform-origin:left;transition:transform .4s ease;
-}
-.stat-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.08)}
-.stat-card:hover::after{transform:scaleX(1)}
-.stat-num{font-family:var(--serif);font-size:2.4rem;font-weight:900;color:var(--ink);line-height:1}
-.stat-label{font-size:.78rem;color:var(--ghost);margin-top:6px;letter-spacing:.02em;font-weight:500}
-
-/* ─── SECTION COMMONS ─── */
-section{padding:100px 40px}
-.section-inner{max-width:1200px;margin:0 auto}
-.section-label{
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:10px;
-}
-.section-label::before{content:'';width:20px;height:1.5px;background:var(--accent)}
-.section-title{
-  font-family:var(--serif);font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;
-  line-height:1.12;letter-spacing:-.02em;color:var(--ink);margin-bottom:16px;
-}
-.section-desc{font-size:1rem;color:var(--slate);max-width:560px;line-height:1.7;margin-bottom:48px}
-
-/* ─── SERVICES ─── */
-.services-section{background:var(--ink);color:var(--paper)}
-.services-section .section-label{color:var(--accent-glow)}
-.services-section .section-label::before{background:var(--accent-glow)}
-.services-section .section-title{color:var(--paper)}
-.services-section .section-desc{color:rgba(255,255,255,.55)}
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.service-card{
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
-  border-radius:16px;padding:32px 28px;transition:all .35s ease;position:relative;overflow:hidden;
-}
-.service-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),transparent);opacity:0;transition:opacity .3s;
-}
-.service-card:hover{background:rgba(255,255,255,.08);transform:translateY(-3px)}
-.service-card:hover::before{opacity:1}
-.service-icon{
-  width:44px;height:44px;border-radius:12px;
-  background:linear-gradient(135deg,var(--accent),var(--accent-glow));
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;margin-bottom:18px;color:white;font-weight:700;
-}
-.service-card h3{font-family:var(--serif);font-size:1.15rem;font-weight:700;margin-bottom:10px;color:var(--paper)}
-.service-card p{font-size:.86rem;line-height:1.65;color:rgba(255,255,255,.5)}
-
-/* ─── CASE STUDIES ─── */
-.case-studies-section{background:var(--paper)}
-.cases-container{display:flex;flex-direction:column;gap:32px}
-.case-card{
-  background:white;border:1px solid rgba(0,0,0,.06);border-radius:20px;
-  overflow:hidden;transition:all .4s ease;
-  display:grid;grid-template-columns:320px 1fr;
-}
-.case-card:hover{box-shadow:0 20px 60px rgba(0,0,0,.08);transform:translateY(-3px)}
-.case-visual{
-  padding:40px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  min-height:100vh;display:flex;align-items:center;
+  padding:140px 48px 100px;
   position:relative;overflow:hidden;
 }
-.case-visual.v1{background:linear-gradient(135deg,#1a1a2e,#16213e)}
-.case-visual.v2{background:linear-gradient(135deg,#0f3443,#34e89e20)}
-.case-visual.v3{background:linear-gradient(135deg,#2d1b4e,#562b7c)}
-.case-visual.v4{background:linear-gradient(135deg,#1b4332,#2d6a4f)}
-.case-visual.v5{background:linear-gradient(135deg,#3d0c02,#c4553a)}
-.case-visual.v6{background:linear-gradient(135deg,#0d1117,#21262d)}
-.case-num{
-  font-family:var(--serif);font-size:5rem;font-weight:900;color:rgba(255,255,255,.08);
-  position:absolute;top:10px;right:20px;line-height:1;
+.hero::before{
+  content:'';position:absolute;top:-200px;right:-150px;width:650px;height:650px;
+  background:radial-gradient(circle,rgba(184,67,47,.06),transparent 70%);pointer-events:none;
 }
-.case-client{
-  font-family:var(--serif);font-size:1.5rem;font-weight:700;color:white;text-align:center;
-  line-height:1.25;z-index:1;
-}
-.case-role{
-  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);
-  margin-top:10px;z-index:1;
-}
-.case-content{padding:40px}
-.case-tag{
-  display:inline-block;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--accent);background:rgba(196,85,58,.08);
-  padding:4px 12px;border-radius:100px;margin-bottom:14px;
-}
-.case-content h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;line-height:1.3;margin-bottom:12px}
-.case-content .challenge{font-size:.88rem;color:var(--slate);line-height:1.65;margin-bottom:16px}
-.deliverables{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.deliverable{
-  font-size:.72rem;font-weight:600;letter-spacing:.03em;
-  padding:5px 14px;border-radius:100px;
-  background:var(--teal-light);color:var(--teal);
-}
-.case-metrics{display:flex;gap:24px;padding-top:16px;border-top:1px solid rgba(0,0,0,.06)}
-.metric{text-align:center}
-.metric-val{font-family:var(--serif);font-size:1.4rem;font-weight:900;color:var(--ink)}
-.metric-lbl{font-size:.68rem;color:var(--ghost);margin-top:2px;letter-spacing:.02em}
+.hero-inner{max-width:1200px;width:100%;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
 
-/* ─── TOOLS ─── */
-.tools-section{background:var(--cream)}
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.tool-group{background:white;border-radius:14px;padding:24px;border:1px solid rgba(0,0,0,.04)}
-.tool-group h4{
-  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:12px;
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--code);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--burnt);margin-bottom:24px;
 }
-.tool-tags{display:flex;flex-wrap:wrap;gap:6px}
-.tool-tag{
-  font-size:.76rem;font-weight:500;padding:4px 12px;border-radius:6px;
-  background:var(--paper);color:var(--slate);border:1px solid rgba(0,0,0,.06);
+.hero-badge::before{content:'';width:24px;height:1.5px;background:var(--burnt)}
+
+.hero h1{
+  font-family:var(--display);font-size:clamp(2.8rem,5.5vw,4.5rem);font-weight:700;
+  line-height:1.05;letter-spacing:-.03em;margin-bottom:24px;
+}
+.hero h1 em{font-style:italic;color:var(--burnt)}
+
+.hero-desc{font-size:1.05rem;line-height:1.75;color:var(--ink-soft);max-width:460px;margin-bottom:36px;font-weight:300}
+
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn-fill{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:14px 34px;border-radius:80px;font-size:.85rem;font-weight:600;
+  text-decoration:none;transition:all .3s;
+  background:var(--ink);color:var(--bg);border:2px solid var(--ink);
+}
+.btn-fill:hover{background:var(--burnt);border-color:var(--burnt);transform:translateY(-2px);box-shadow:0 8px 28px rgba(184,67,47,.22)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:14px 34px;border-radius:80px;font-size:.85rem;font-weight:600;
+  text-decoration:none;transition:all .3s;
+  background:transparent;color:var(--ink);border:2px solid var(--line);
+}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat{
+  background:var(--white);border:1px solid rgba(0,0,0,.05);border-radius:18px;
+  padding:28px 22px;position:relative;overflow:hidden;
+  transition:transform .35s,box-shadow .35s;
+}
+.stat::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--burnt),var(--forest));
+  transform:scaleX(0);transition:transform .4s;transform-origin:left;
+}
+.stat:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.07)}
+.stat:hover::after{transform:scaleX(1)}
+.stat-number{font-family:var(--display);font-size:2.6rem;font-weight:700;line-height:1;color:var(--ink)}
+.stat-text{font-size:.76rem;color:var(--ink-muted);margin-top:6px;font-weight:500;letter-spacing:.01em}
+
+@media(max-width:900px){
+  .hero{padding:120px 24px 60px}
+  .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+  .hero-desc{margin-inline:auto}
+  .hero-buttons{justify-content:center}
+  .hero-badge{justify-content:center}
 }
 
-/* ─── WHY ME ─── */
-.why-section{background:var(--paper)}
-.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+/* ═══════════ SECTIONS SHARED ═══════════ */
+.sec{padding:100px 48px}
+.sec-inner{max-width:1200px;margin:0 auto}
+.sec-tag{
+  font-family:var(--code);font-size:.67rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--burnt);margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.sec-tag::before{content:'';width:18px;height:1.5px;background:var(--burnt)}
+.sec-heading{font-family:var(--display);font-size:clamp(2rem,3.5vw,2.8rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:14px}
+.sec-sub{font-size:.95rem;line-height:1.7;color:var(--ink-soft);max-width:520px;margin-bottom:48px;font-weight:300}
+
+@media(max-width:768px){
+  .sec{padding:60px 20px}
+}
+
+/* ═══════════ SERVICES ═══════════ */
+.services{background:var(--bg-dark);color:var(--bg)}
+.services .sec-tag{color:var(--burnt-hover)}
+.services .sec-tag::before{background:var(--burnt-hover)}
+.services .sec-heading{color:var(--bg)}
+.services .sec-sub{color:rgba(255,255,255,.45)}
+
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.svc{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  border-radius:16px;padding:30px 26px;transition:all .3s;position:relative;overflow:hidden;
+}
+.svc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--burnt);opacity:0;transition:opacity .3s;
+}
+.svc:hover{background:rgba(255,255,255,.08);transform:translateY(-3px)}
+.svc:hover::before{opacity:1}
+.svc-ico{
+  width:42px;height:42px;border-radius:11px;margin-bottom:16px;
+  background:linear-gradient(135deg,var(--burnt),var(--burnt-hover));
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;
+}
+.svc h3{font-family:var(--display);font-size:1.2rem;font-weight:700;margin-bottom:8px}
+.svc p{font-size:.82rem;line-height:1.65;color:rgba(255,255,255,.45)}
+
+/* ═══════════ CASE STUDIES ═══════════ */
+.work{background:var(--bg)}
+.cases{display:flex;flex-direction:column;gap:28px}
+
+.case{
+  background:var(--white);border:1px solid rgba(0,0,0,.05);border-radius:20px;
+  overflow:hidden;display:grid;grid-template-columns:300px 1fr;
+  transition:all .4s;
+}
+.case:hover{box-shadow:0 20px 56px rgba(0,0,0,.07);transform:translateY(-3px)}
+
+.case-side{
+  padding:36px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  position:relative;overflow:hidden;
+}
+.case-side.c1{background:linear-gradient(135deg,#151B2E,#1F2B4A)}
+.case-side.c2{background:linear-gradient(135deg,#0C3024,#1A5C40)}
+.case-side.c3{background:linear-gradient(135deg,#2B1740,#4C2874)}
+.case-side.c4{background:linear-gradient(135deg,#1A3328,#2C6B4B)}
+.case-side.c5{background:linear-gradient(135deg,#3A0E04,#B8432F)}
+.case-side.c6{background:linear-gradient(135deg,#111318,#252830)}
+
+.case-n{
+  font-family:var(--display);font-size:5rem;font-weight:700;
+  color:rgba(255,255,255,.06);position:absolute;top:6px;right:16px;line-height:1;
+}
+.case-name{font-family:var(--display);font-size:1.45rem;font-weight:700;color:#fff;text-align:center;z-index:1;line-height:1.2}
+.case-pos{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:10px;z-index:1}
+
+.case-body{padding:36px}
+.case-label{
+  display:inline-block;font-family:var(--code);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--burnt);background:rgba(184,67,47,.07);
+  padding:4px 12px;border-radius:80px;margin-bottom:12px;
+}
+.case-body h3{font-family:var(--display);font-size:1.3rem;font-weight:700;line-height:1.25;margin-bottom:10px}
+.case-desc{font-size:.84rem;color:var(--ink-soft);line-height:1.65;margin-bottom:14px;font-weight:300}
+
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.tag{
+  font-size:.68rem;font-weight:600;letter-spacing:.02em;
+  padding:4px 13px;border-radius:80px;
+  background:var(--forest-light);color:var(--forest);
+}
+
+.metrics{display:flex;gap:20px;padding-top:14px;border-top:1px solid rgba(0,0,0,.06);flex-wrap:wrap}
+.met-val{font-family:var(--display);font-size:1.35rem;font-weight:700;color:var(--ink)}
+.met-lbl{font-size:.65rem;color:var(--ink-muted);margin-top:1px;letter-spacing:.01em}
+
+@media(max-width:900px){
+  .case{grid-template-columns:1fr}
+  .case-side{padding:28px;min-height:140px}
+  .case-body{padding:24px}
+}
+
+/* ═══════════ TOOLS ═══════════ */
+.tools{background:var(--bg-warm)}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.tool-box{background:var(--white);border-radius:14px;padding:22px;border:1px solid rgba(0,0,0,.04)}
+.tool-box h4{font-family:var(--code);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--burnt);margin-bottom:10px}
+.tool-pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:.74rem;font-weight:500;padding:4px 11px;border-radius:6px;background:var(--bg);color:var(--ink-soft);border:1px solid rgba(0,0,0,.05)}
+
+/* ═══════════ WHY ME ═══════════ */
+.why{background:var(--bg)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
 .why-card{
-  padding:32px;border-radius:16px;border:1px solid rgba(0,0,0,.06);
-  background:white;transition:all .35s ease;position:relative;
+  padding:30px;border-radius:16px;border:1px solid rgba(0,0,0,.05);
+  background:var(--white);transition:all .35s;
 }
-.why-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.06)}
-.why-card h3{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:10px}
-.why-card h3 span{color:var(--accent);font-size:1.4rem}
-.why-card p{font-size:.86rem;line-height:1.65;color:var(--slate)}
+.why-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.06)}
+.why-card h3{font-family:var(--display);font-size:1.1rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.why-card h3 span{font-size:1.3rem}
+.why-card p{font-size:.84rem;line-height:1.65;color:var(--ink-soft);font-weight:300}
 
-/* ─── CTA ─── */
-.cta-section{
-  background:var(--ink);padding:100px 40px;text-align:center;position:relative;overflow:hidden;
+/* ═══════════ CTA ═══════════ */
+.cta{
+  background:var(--bg-dark);padding:100px 48px;text-align:center;
+  position:relative;overflow:hidden;
 }
-.cta-section::before{
-  content:'';position:absolute;top:50%;left:50%;width:800px;height:800px;
-  background:radial-gradient(circle,rgba(196,85,58,.12) 0%,transparent 60%);
+.cta::before{
+  content:'';position:absolute;top:50%;left:50%;width:700px;height:700px;
+  background:radial-gradient(circle,rgba(184,67,47,.1),transparent 60%);
   transform:translate(-50%,-50%);pointer-events:none;
 }
-.cta-section .section-label{justify-content:center;color:var(--accent-glow)}
-.cta-section .section-label::before{background:var(--accent-glow)}
-.cta-section h2{
-  font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:900;
-  color:var(--paper);margin-bottom:16px;position:relative;
-}
-.cta-section p{font-size:1rem;color:rgba(255,255,255,.5);margin-bottom:36px;max-width:500px;margin-inline:auto;line-height:1.7;position:relative}
+.cta .sec-tag{justify-content:center;color:var(--burnt-hover)}
+.cta .sec-tag::before{background:var(--burnt-hover)}
+.cta h2{font-family:var(--display);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--bg);margin-bottom:14px;position:relative}
+.cta p{font-size:.95rem;color:rgba(255,255,255,.4);margin-bottom:36px;max-width:480px;margin-inline:auto;line-height:1.7;position:relative;font-weight:300}
 .cta-btn{
   display:inline-flex;align-items:center;gap:8px;
-  background:var(--accent);color:white;
-  padding:16px 40px;border-radius:100px;font-size:.95rem;font-weight:700;
-  text-decoration:none;letter-spacing:.01em;
-  transition:all .3s ease;position:relative;
+  background:var(--burnt);color:#fff;
+  padding:16px 40px;border-radius:80px;font-size:.9rem;font-weight:700;
+  text-decoration:none;transition:all .3s;position:relative;
 }
-.cta-btn:hover{background:var(--accent-glow);transform:translateY(-2px);box-shadow:0 10px 40px rgba(196,85,58,.35)}
-.cta-contact{margin-top:28px;font-size:.85rem;color:rgba(255,255,255,.35);position:relative}
-.cta-contact a{color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s}
-.cta-contact a:hover{color:var(--accent-glow)}
+.cta-btn:hover{background:var(--burnt-hover);transform:translateY(-2px);box-shadow:0 10px 36px rgba(184,67,47,.3)}
+.cta-links{margin-top:24px;font-size:.82rem;color:rgba(255,255,255,.3);position:relative}
+.cta-links a{color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s}
+.cta-links a:hover{color:var(--burnt-hover)}
 
-/* ─── FOOTER ─── */
-footer{padding:24px 40px;text-align:center;font-size:.75rem;color:var(--ghost);border-top:1px solid rgba(0,0,0,.06)}
+/* ═══════════ FOOTER ═══════════ */
+footer{padding:22px 48px;text-align:center;font-size:.72rem;color:var(--ink-muted);border-top:1px solid var(--line)}
 
-/* ─── ANIMATIONS ─── */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
-.reveal-delay-4{transition-delay:.4s}
-
-/* ─── MOBILE ─── */
-@media(max-width:900px){
-  .hero-grid{grid-template-columns:1fr;gap:40px;text-align:center}
-  .hero-sub{margin-inline:auto}
-  .hero-actions{justify-content:center}
-  .hero-eyebrow{justify-content:center}
-  .case-card{grid-template-columns:1fr}
-  .case-visual{padding:32px;min-height:160px}
-  .nav-links{display:none}
-  section{padding:60px 20px}
-  .nav-inner{padding:14px 20px}
-  .hero{padding:100px 20px 60px}
-}
-@media(max-width:600px){
-  .hero-stats{grid-template-columns:1fr 1fr;gap:10px}
-  .stat-card{padding:20px 16px}
-  .stat-num{font-size:1.8rem}
-  .case-metrics{flex-wrap:wrap;gap:16px}
-  .case-content{padding:24px}
-}
+/* ═══════════ ANIMATIONS ═══════════ */
+.fade{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.fade.show{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
 </style>
 </head>
 <body>
 
-<!-- Scroll progress -->
-<div class="scroll-progress" id="scrollProgress"></div>
+<div id="progress"></div>
 
-<!-- Nav -->
-<nav id="nav">
-  <div class="nav-inner">
-    <div class="nav-brand">Loye<span>.</span></div>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#tools">Tools</a></li>
-      <li><a href="#why">Why Me</a></li>
-    </ul>
-    <a href="#contact" class="nav-cta">Let's Talk →</a>
-  </div>
+<!-- NAV -->
+<nav class="nav" id="topnav">
+  <a href="#" class="nav-logo">Loye<i>.</i></a>
+  <ul class="nav-menu">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#why">Why Me</a></li>
+  </ul>
+  <a href="#contact" class="nav-hire">Let's Talk</a>
 </nav>
 
-<!-- ════════════════════ HERO ════════════════════ -->
-<section class="hero" id="hero">
-  <div class="hero-grid">
+<!-- ════════════ HERO ════════════ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
     <div>
-      <div class="hero-eyebrow">Lagos, Nigeria</div>
-      <h1>I build marketing systems that <em>actually grow</em> businesses.</h1>
-      <p class="hero-sub">10+ years turning CRM pipelines, paid media, and automation into real revenue — across African and international markets.</p>
-      <div class="hero-actions">
-        <a href="#work" class="btn-primary">See My Work ↓</a>
-        <a href="#contact" class="btn-secondary">Hire Me</a>
+      <div class="hero-badge fade">Lagos, Nigeria</div>
+      <h1 class="fade d1">I build marketing<br>systems that <em>actually grow</em> businesses.</h1>
+      <p class="hero-desc fade d2">10+ years turning CRM pipelines, paid media, and automation into real revenue across African and international markets.</p>
+      <div class="hero-buttons fade d3">
+        <a href="#work" class="btn-fill">See My Work</a>
+        <a href="#contact" class="btn-ghost">Hire Me</a>
       </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat-card reveal">
-        <div class="stat-num">10+</div>
-        <div class="stat-label">Years Experience</div>
-      </div>
-      <div class="stat-card reveal reveal-delay-1">
-        <div class="stat-num">68K+</div>
-        <div class="stat-label">Audience Built</div>
-      </div>
-      <div class="stat-card reveal reveal-delay-2">
-        <div class="stat-num">6+</div>
-        <div class="stat-label">Brands Managed</div>
-      </div>
-      <div class="stat-card reveal reveal-delay-3">
-        <div class="stat-num">3</div>
-        <div class="stat-label">Continents Served</div>
-      </div>
+    <div class="stats-grid">
+      <div class="stat fade"><div class="stat-number">10+</div><div class="stat-text">Years Experience</div></div>
+      <div class="stat fade d1"><div class="stat-number">68K+</div><div class="stat-text">Audience Built</div></div>
+      <div class="stat fade d2"><div class="stat-number">6+</div><div class="stat-text">Brands Managed</div></div>
+      <div class="stat fade d3"><div class="stat-number">3</div><div class="stat-text">Continents Served</div></div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════ SERVICES ════════════════════ -->
-<section class="services-section" id="services">
-  <div class="section-inner">
-    <div class="section-label">What I Do</div>
-    <h2 class="section-title">Full-funnel marketing,<br>not just tactics.</h2>
-    <p class="section-desc">I don't just run ads. I build the entire ecosystem — CRM, content, automation, and analytics — so your marketing runs like a machine.</p>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-icon">⚡</div>
+<!-- ════════════ SERVICES ════════════ -->
+<section class="services sec" id="services">
+  <div class="sec-inner">
+    <div class="sec-tag fade">What I Do</div>
+    <h2 class="sec-heading fade d1">Full-funnel marketing,<br>not just tactics.</h2>
+    <p class="sec-sub fade d2">I build the entire ecosystem &mdash; CRM, content, automation, and analytics &mdash; so your marketing runs like a machine.</p>
+    <div class="svc-grid">
+      <div class="svc fade">
+        <div class="svc-ico">&#9889;</div>
         <h3>Digital Marketing Strategy</h3>
         <p>90-day strategic roadmaps with budget planning, channel selection, and KPI frameworks tailored for African and international markets.</p>
       </div>
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon">🔧</div>
+      <div class="svc fade d1">
+        <div class="svc-ico">&#128295;</div>
         <h3>CRM Implementation</h3>
-        <p>Microsoft Dynamics 365 and Zoho CRM setup — audience segmentation, automated customer journeys, email sequences, and pipeline management.</p>
+        <p>Microsoft Dynamics 365 and Zoho CRM setup &mdash; audience segmentation, customer journeys, sequences, and pipeline management.</p>
       </div>
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon">📈</div>
+      <div class="svc fade d2">
+        <div class="svc-ico">&#128200;</div>
         <h3>Performance Marketing</h3>
-        <p>Meta Ads, Google Ads, Google UAC, and LinkedIn Ads. Budget optimization, A/B testing, audience targeting, and conversion tracking at scale.</p>
+        <p>Meta Ads, Google Ads, Google UAC, and LinkedIn Ads. Budget optimization, A/B testing, audience targeting, and conversion tracking.</p>
       </div>
-      <div class="service-card reveal reveal-delay-3">
-        <div class="service-icon">🔍</div>
-        <h3>SEO & Content</h3>
-        <p>Keyword research, competitive analysis, on-page optimization, and internal linking strategies. SEO-driven blog content that ranks and converts.</p>
+      <div class="svc fade d3">
+        <div class="svc-ico">&#128269;</div>
+        <h3>SEO &amp; Content</h3>
+        <p>Keyword research, competitive analysis, on-page optimization, and internal linking strategies. Content that ranks and converts.</p>
       </div>
-      <div class="service-card reveal">
-        <div class="service-icon">🤖</div>
+      <div class="svc fade">
+        <div class="svc-ico">&#129302;</div>
         <h3>Marketing Automation</h3>
-        <p>Automated workflows via n8n, Zapier, and Power Automate — from job scrapers to LinkedIn posting pipelines to CRM-triggered nurture sequences.</p>
+        <p>Automated workflows via n8n, Zapier, and Power Automate. Job scrapers, LinkedIn posting pipelines, CRM-triggered nurture sequences.</p>
       </div>
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon">💼</div>
+      <div class="svc fade d1">
+        <div class="svc-ico">&#128188;</div>
         <h3>LinkedIn Thought Leadership</h3>
         <p>Executive ghostwriting with structured playbooks. Research-driven content, engagement frameworks, and posting cadence optimization.</p>
       </div>
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon">📱</div>
+      <div class="svc fade d2">
+        <div class="svc-ico">&#128241;</div>
         <h3>Social Media Management</h3>
-        <p>Multi-brand social media operations across LinkedIn, Instagram, Facebook, and Twitter. Content calendars, community management, and analytics reporting.</p>
+        <p>Multi-brand social media across LinkedIn, Instagram, Facebook, and Twitter. Content calendars, community management, analytics.</p>
       </div>
-      <div class="service-card reveal reveal-delay-3">
-        <div class="service-icon">📄</div>
-        <h3>Resume Writing & Career Services</h3>
-        <p>ATS-optimized resume writing and LinkedIn profile optimization through Career Clarity Resumes. Serving marketing and tech professionals globally.</p>
+      <div class="svc fade d3">
+        <div class="svc-ico">&#128196;</div>
+        <h3>Resume Writing &amp; Career Services</h3>
+        <p>ATS-optimized resume writing and LinkedIn profile optimization through Career Clarity Resumes. Serving professionals globally.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════ CASE STUDIES ════════════════════ -->
-<section class="case-studies-section" id="work">
-  <div class="section-inner">
-    <div class="section-label">Selected Work</div>
-    <h2 class="section-title">Projects that moved the needle.</h2>
-    <p class="section-desc">Real campaigns, real systems, real results. Each project showcases a different dimension of what I bring to the table.</p>
+<!-- ════════════ CASE STUDIES ════════════ -->
+<section class="work sec" id="work">
+  <div class="sec-inner">
+    <div class="sec-tag fade">Selected Work</div>
+    <h2 class="sec-heading fade d1">Projects that moved the needle.</h2>
+    <p class="sec-sub fade d2">Real campaigns, real systems, real results.</p>
 
-    <div class="cases-container">
+    <div class="cases">
 
-      <!-- Case 1: TEPS -->
-      <div class="case-card reveal">
-        <div class="case-visual v1">
-          <div class="case-num">01</div>
-          <div class="case-client">TEPS</div>
-          <div class="case-role">Full Digital Build</div>
+      <!-- 01 TEPS -->
+      <div class="case fade">
+        <div class="case-side c1">
+          <div class="case-n">01</div>
+          <div class="case-name">TEPS</div>
+          <div class="case-pos">Full Digital Build</div>
         </div>
-        <div class="case-content">
-          <span class="case-tag">Event Management Platform</span>
+        <div class="case-body">
+          <span class="case-label">Event Management Platform</span>
           <h3>Built an entire digital marketing infrastructure from scratch</h3>
-          <p class="challenge">TEPS needed everything — strategy, CRM, ads, content, and brand assets. I delivered a complete 90-day marketing ecosystem with a ₦2M+ budget, including Zoho CRM implementation, Meta ad campaigns for Wild West Throwdown 3.0, social content calendars, SEO blog content, and branded design assets.</p>
-          <div class="deliverables">
-            <span class="deliverable">90-Day Strategy</span>
-            <span class="deliverable">Zoho CRM Setup</span>
-            <span class="deliverable">Meta Ads</span>
-            <span class="deliverable">SEO Content</span>
-            <span class="deliverable">Brand Assets</span>
-            <span class="deliverable">Team Training</span>
+          <p class="case-desc">TEPS needed everything &mdash; strategy, CRM, ads, content, and brand assets. I delivered a 90-day marketing ecosystem with a &#8358;2M+ budget, including Zoho CRM implementation, Meta ad campaigns for Wild West Throwdown 3.0, social content calendars, SEO blog content, and branded design assets.</p>
+          <div class="tags">
+            <span class="tag">90-Day Strategy</span><span class="tag">Zoho CRM Setup</span><span class="tag">Meta Ads</span><span class="tag">SEO Content</span><span class="tag">Brand Assets</span><span class="tag">Team Training</span>
           </div>
-          <div class="case-metrics">
-            <div class="metric"><div class="metric-val">₦2M+</div><div class="metric-lbl">Budget Managed</div></div>
-            <div class="metric"><div class="metric-val">3</div><div class="metric-lbl">Platforms</div></div>
-            <div class="metric"><div class="metric-val">90</div><div class="metric-lbl">Day Roadmap</div></div>
-            <div class="metric"><div class="metric-val">Full</div><div class="metric-lbl">CRM Build</div></div>
+          <div class="metrics">
+            <div><div class="met-val">&#8358;2M+</div><div class="met-lbl">Budget Managed</div></div>
+            <div><div class="met-val">3</div><div class="met-lbl">Platforms</div></div>
+            <div><div class="met-val">90</div><div class="met-lbl">Day Roadmap</div></div>
+            <div><div class="met-val">Full</div><div class="met-lbl">CRM Build</div></div>
           </div>
         </div>
       </div>
 
-      <!-- Case 2: Reliance -->
-      <div class="case-card reveal">
-        <div class="case-visual v2">
-          <div class="case-num">02</div>
-          <div class="case-client">Reliance Infosystems</div>
-          <div class="case-role">Digital Marketing Executive</div>
+      <!-- 02 Reliance -->
+      <div class="case fade">
+        <div class="case-side c2">
+          <div class="case-n">02</div>
+          <div class="case-name">Reliance Infosystems</div>
+          <div class="case-pos">Digital Marketing Executive</div>
         </div>
-        <div class="case-content">
-          <span class="case-tag">B2B Technology — Multi-Entity</span>
+        <div class="case-body">
+          <span class="case-label">B2B Technology &mdash; Multi-Entity</span>
           <h3>Led digital marketing across 6+ business entities on 3 continents</h3>
-          <p class="challenge">Managed the Digital Success DM Team across Reliance Global, UK, and North America, plus Cloudware Africa, Digitank Africa, PlungeSmile, Careerdemy, and Modiva. Ran Dynamics 365 CRM, enriched 1,000+ leads monthly, built a 222-link internal linking map for the UK site, and managed 68K+ social followers.</p>
-          <div class="deliverables">
-            <span class="deliverable">Dynamics 365 CRM</span>
-            <span class="deliverable">Lead Enrichment</span>
-            <span class="deliverable">SEO Strategy</span>
-            <span class="deliverable">Social Media (6 Brands)</span>
-            <span class="deliverable">Internal Linking</span>
-            <span class="deliverable">Weekly Analytics</span>
+          <p class="case-desc">Managed the Digital Success DM Team across Reliance Global, UK, and North America, plus Cloudware Africa, Digitank Africa, PlungeSmile, Careerdemy, and Modiva. Ran Dynamics 365 CRM, enriched 1,000+ leads monthly, built a 222-link internal linking map, and managed 68K+ social followers.</p>
+          <div class="tags">
+            <span class="tag">Dynamics 365 CRM</span><span class="tag">Lead Enrichment</span><span class="tag">SEO Strategy</span><span class="tag">Social Media (6 Brands)</span><span class="tag">Internal Linking</span><span class="tag">Weekly Analytics</span>
           </div>
-          <div class="case-metrics">
-            <div class="metric"><div class="metric-val">68K+</div><div class="metric-lbl">Audience</div></div>
-            <div class="metric"><div class="metric-val">6+</div><div class="metric-lbl">Entities</div></div>
-            <div class="metric"><div class="metric-val">1K+</div><div class="metric-lbl">Leads/Month</div></div>
-            <div class="metric"><div class="metric-val">222</div><div class="metric-lbl">Links Mapped</div></div>
+          <div class="metrics">
+            <div><div class="met-val">68K+</div><div class="met-lbl">Audience</div></div>
+            <div><div class="met-val">6+</div><div class="met-lbl">Entities</div></div>
+            <div><div class="met-val">1K+</div><div class="met-lbl">Leads/Month</div></div>
+            <div><div class="met-val">222</div><div class="met-lbl">Links Mapped</div></div>
           </div>
         </div>
       </div>
 
-      <!-- Case 3: Solutions MGA -->
-      <div class="case-card reveal">
-        <div class="case-visual v3">
-          <div class="case-num">03</div>
-          <div class="case-client">Solutions MGA</div>
-          <div class="case-role">LinkedIn Strategist</div>
+      <!-- 03 Solutions MGA -->
+      <div class="case fade">
+        <div class="case-side c3">
+          <div class="case-n">03</div>
+          <div class="case-name">Solutions MGA</div>
+          <div class="case-pos">LinkedIn Strategist</div>
         </div>
-        <div class="case-content">
-          <span class="case-tag">IT Consulting — Thought Leadership</span>
+        <div class="case-body">
+          <span class="case-label">IT Consulting &mdash; Thought Leadership</span>
           <h3>Positioned a Fortune 500-serving CEO as a LinkedIn thought leader</h3>
-          <p class="challenge">Built a structured LinkedIn content engine for Tom McDonald, CEO of a Cincinnati-based IT firm serving P&G, LexisNexis, USDA, and Kroger. Developed a playbook (50% polls, 30% educational, 20% contrarian), created carousel designs, and automated weekly content production with AI-assisted workflows.</p>
-          <div class="deliverables">
-            <span class="deliverable">Content Playbook</span>
-            <span class="deliverable">Ghostwriting</span>
-            <span class="deliverable">Carousel Design</span>
-            <span class="deliverable">AI Automation</span>
-            <span class="deliverable">A/B Testing</span>
+          <p class="case-desc">Built a structured LinkedIn content engine for the CEO of a Cincinnati-based IT firm serving P&amp;G, LexisNexis, USDA, and Kroger. Developed a playbook (50% polls, 30% educational, 20% contrarian), created carousel designs, and automated weekly content production.</p>
+          <div class="tags">
+            <span class="tag">Content Playbook</span><span class="tag">Ghostwriting</span><span class="tag">Carousel Design</span><span class="tag">AI Automation</span><span class="tag">A/B Testing</span>
           </div>
-          <div class="case-metrics">
-            <div class="metric"><div class="metric-val">Weekly</div><div class="metric-lbl">Publishing</div></div>
-            <div class="metric"><div class="metric-val">3</div><div class="metric-lbl">Content Pillars</div></div>
-            <div class="metric"><div class="metric-val">F500</div><div class="metric-lbl">Client Base</div></div>
+          <div class="metrics">
+            <div><div class="met-val">Weekly</div><div class="met-lbl">Publishing</div></div>
+            <div><div class="met-val">3</div><div class="met-lbl">Content Pillars</div></div>
+            <div><div class="met-val">F500</div><div class="met-lbl">Client Base</div></div>
           </div>
         </div>
       </div>
 
-      <!-- Case 4: LincRide -->
-      <div class="case-card reveal">
-        <div class="case-visual v4">
-          <div class="case-num">04</div>
-          <div class="case-client">LincRide</div>
-          <div class="case-role">Marketing Strategy</div>
+      <!-- 04 LincRide -->
+      <div class="case fade">
+        <div class="case-side c4">
+          <div class="case-n">04</div>
+          <div class="case-name">LincRide</div>
+          <div class="case-pos">Marketing Strategy</div>
         </div>
-        <div class="case-content">
-          <span class="case-tag">Carpooling Platform — Lagos</span>
-          <h3>Comprehensive marketing strategy that advanced to final interview</h3>
-          <p class="challenge">Built a full marketing strategy for Lagos-based carpooling startup including pitch deck, Excel financial model with CAC/LTV projections, rider and driver acquisition strategies, trust-and-safety marketing framework, and phased content strategy across Instagram, TikTok, Facebook, and WhatsApp.</p>
-          <div class="deliverables">
-            <span class="deliverable">Pitch Deck</span>
-            <span class="deliverable">Financial Model</span>
-            <span class="deliverable">Acquisition Strategy</span>
-            <span class="deliverable">Trust Framework</span>
-            <span class="deliverable">Content Strategy</span>
+        <div class="case-body">
+          <span class="case-label">Carpooling Platform &mdash; Lagos</span>
+          <h3>Marketing strategy that advanced to final interview round</h3>
+          <p class="case-desc">Built a full marketing strategy for a Lagos carpooling startup: pitch deck, Excel financial model with CAC/LTV projections, rider and driver acquisition strategies, trust-and-safety framework, and phased content strategy across Instagram, TikTok, Facebook, and WhatsApp.</p>
+          <div class="tags">
+            <span class="tag">Pitch Deck</span><span class="tag">Financial Model</span><span class="tag">Acquisition Strategy</span><span class="tag">Trust Framework</span><span class="tag">Content Strategy</span>
           </div>
-          <div class="case-metrics">
-            <div class="metric"><div class="metric-val">Final</div><div class="metric-lbl">Round Reached</div></div>
-            <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Deliverables</div></div>
-            <div class="metric"><div class="metric-val">4</div><div class="metric-lbl">Channels Planned</div></div>
+          <div class="metrics">
+            <div><div class="met-val">Final</div><div class="met-lbl">Round Reached</div></div>
+            <div><div class="met-val">5</div><div class="met-lbl">Deliverables</div></div>
+            <div><div class="met-val">4</div><div class="met-lbl">Channels Planned</div></div>
           </div>
         </div>
       </div>
 
-      <!-- Case 5: Career Clarity -->
-      <div class="case-card reveal">
-        <div class="case-visual v5">
-          <div class="case-num">05</div>
-          <div class="case-client">Career Clarity Resumes</div>
-          <div class="case-role">Founder</div>
+      <!-- 05 Career Clarity -->
+      <div class="case fade">
+        <div class="case-side c5">
+          <div class="case-n">05</div>
+          <div class="case-name">Career Clarity Resumes</div>
+          <div class="case-pos">Founder</div>
         </div>
-        <div class="case-content">
-          <span class="case-tag">Professional Services — Own Business</span>
+        <div class="case-body">
+          <span class="case-label">Professional Services &mdash; Own Business</span>
           <h3>Resume writing service with AI-powered client workflows</h3>
-          <p class="challenge">Built and run a professional resume writing service offering ATS-optimized resumes, LinkedIn profile optimization, and career transition support. Automated the proposal workflow using AI-assisted prompts for faster client turnaround. Serving marketing and tech professionals globally.</p>
-          <div class="deliverables">
-            <span class="deliverable">ATS Optimization</span>
-            <span class="deliverable">LinkedIn Profiles</span>
-            <span class="deliverable">Career Transitions</span>
-            <span class="deliverable">Automated Proposals</span>
+          <p class="case-desc">Built and run a professional resume writing service offering ATS-optimized resumes, LinkedIn profile optimization, and career transition support. Automated the proposal workflow using AI-assisted prompts for faster client turnaround.</p>
+          <div class="tags">
+            <span class="tag">ATS Optimization</span><span class="tag">LinkedIn Profiles</span><span class="tag">Career Transitions</span><span class="tag">Automated Proposals</span>
           </div>
         </div>
       </div>
 
-      <!-- Case 6: n8n Automation -->
-      <div class="case-card reveal">
-        <div class="case-visual v6">
-          <div class="case-num">06</div>
-          <div class="case-client">Job Bot Pipeline</div>
-          <div class="case-role">Automation Build</div>
+      <!-- 06 Job Bot -->
+      <div class="case fade">
+        <div class="case-side c6">
+          <div class="case-n">06</div>
+          <div class="case-name">Job Bot Pipeline</div>
+          <div class="case-pos">Automation Build</div>
         </div>
-        <div class="case-content">
-          <span class="case-tag">Marketing Automation — n8n</span>
-          <h3>Fully automated job scraping & Twitter posting pipeline</h3>
-          <p class="challenge">Designed and built an end-to-end n8n workflow that scrapes remote tech jobs from RemoteOK, We Work Remotely, and LinkedIn (via Apify), deduplicates via Google Sheets, applies keyword/location filters, and auto-posts to Twitter/X on a scheduled cadence.</p>
-          <div class="deliverables">
-            <span class="deliverable">n8n Workflow</span>
-            <span class="deliverable">Web Scraping</span>
-            <span class="deliverable">Deduplication</span>
-            <span class="deliverable">Twitter API</span>
-            <span class="deliverable">Google Sheets DB</span>
+        <div class="case-body">
+          <span class="case-label">Marketing Automation &mdash; n8n</span>
+          <h3>Fully automated job scraping &amp; Twitter posting pipeline</h3>
+          <p class="case-desc">End-to-end n8n workflow scraping remote tech jobs from RemoteOK, We Work Remotely, and LinkedIn (via Apify), deduplicating via Google Sheets, applying keyword/location filters, and auto-posting to Twitter/X on a scheduled cadence.</p>
+          <div class="tags">
+            <span class="tag">n8n Workflow</span><span class="tag">Web Scraping</span><span class="tag">Deduplication</span><span class="tag">Twitter API</span><span class="tag">Google Sheets DB</span>
           </div>
         </div>
       </div>
@@ -565,163 +511,151 @@ footer{padding:24px 40px;text-align:center;font-size:.75rem;color:var(--ghost);b
   </div>
 </section>
 
-<!-- ════════════════════ TOOLS ════════════════════ -->
-<section class="tools-section" id="tools">
-  <div class="section-inner">
-    <div class="section-label">My Stack</div>
-    <h2 class="section-title">Tools I work with daily.</h2>
-    <p class="section-desc">The platforms and technologies behind the results.</p>
+<!-- ════════════ TOOLS ════════════ -->
+<section class="tools sec" id="tools">
+  <div class="sec-inner">
+    <div class="sec-tag fade">My Stack</div>
+    <h2 class="sec-heading fade d1">Tools I work with daily.</h2>
+    <p class="sec-sub fade d2">The platforms behind the results.</p>
     <div class="tools-grid">
-      <div class="tool-group reveal">
-        <h4>CRM & Automation</h4>
-        <div class="tool-tags">
-          <span class="tool-tag">Dynamics 365</span>
-          <span class="tool-tag">Zoho CRM</span>
-          <span class="tool-tag">n8n</span>
-          <span class="tool-tag">Zapier</span>
-          <span class="tool-tag">Power Automate</span>
-          <span class="tool-tag">Mailchimp</span>
+      <div class="tool-box fade">
+        <h4>CRM &amp; Automation</h4>
+        <div class="tool-pills">
+          <span class="pill">Dynamics 365</span><span class="pill">Zoho CRM</span><span class="pill">n8n</span><span class="pill">Zapier</span><span class="pill">Power Automate</span><span class="pill">Mailchimp</span>
         </div>
       </div>
-      <div class="tool-group reveal reveal-delay-1">
+      <div class="tool-box fade d1">
         <h4>Paid Media</h4>
-        <div class="tool-tags">
-          <span class="tool-tag">Meta Ads</span>
-          <span class="tool-tag">Google Ads</span>
-          <span class="tool-tag">Google UAC</span>
-          <span class="tool-tag">LinkedIn Ads</span>
+        <div class="tool-pills">
+          <span class="pill">Meta Ads</span><span class="pill">Google Ads</span><span class="pill">Google UAC</span><span class="pill">LinkedIn Ads</span>
         </div>
       </div>
-      <div class="tool-group reveal reveal-delay-2">
-        <h4>SEO & Analytics</h4>
-        <div class="tool-tags">
-          <span class="tool-tag">SEMrush</span>
-          <span class="tool-tag">Google Search Console</span>
-          <span class="tool-tag">Google Analytics</span>
-          <span class="tool-tag">Microsoft Clarity</span>
+      <div class="tool-box fade d2">
+        <h4>SEO &amp; Analytics</h4>
+        <div class="tool-pills">
+          <span class="pill">SEMrush</span><span class="pill">Google Search Console</span><span class="pill">Google Analytics</span><span class="pill">Microsoft Clarity</span>
         </div>
       </div>
-      <div class="tool-group reveal reveal-delay-3">
+      <div class="tool-box fade d3">
         <h4>Lead Generation</h4>
-        <div class="tool-tags">
-          <span class="tool-tag">LinkedIn Sales Nav</span>
-          <span class="tool-tag">ZoomInfo</span>
-          <span class="tool-tag">Snovio</span>
-          <span class="tool-tag">Apify</span>
-          <span class="tool-tag">Apollo.io</span>
+        <div class="tool-pills">
+          <span class="pill">LinkedIn Sales Nav</span><span class="pill">ZoomInfo</span><span class="pill">Snovio</span><span class="pill">Apify</span><span class="pill">Apollo.io</span>
         </div>
       </div>
-      <div class="tool-group reveal">
-        <h4>Social & Content</h4>
-        <div class="tool-tags">
-          <span class="tool-tag">Hootsuite</span>
-          <span class="tool-tag">Canva</span>
-          <span class="tool-tag">Buffer</span>
-          <span class="tool-tag">Google Tag Manager</span>
-          <span class="tool-tag">Firebase</span>
+      <div class="tool-box fade">
+        <h4>Social &amp; Content</h4>
+        <div class="tool-pills">
+          <span class="pill">Hootsuite</span><span class="pill">Canva</span><span class="pill">Buffer</span><span class="pill">Google Tag Manager</span><span class="pill">Firebase</span>
         </div>
       </div>
-      <div class="tool-group reveal reveal-delay-1">
-        <h4>AI & Development</h4>
-        <div class="tool-tags">
-          <span class="tool-tag">Claude AI</span>
-          <span class="tool-tag">ChatGPT</span>
-          <span class="tool-tag">WordPress</span>
-          <span class="tool-tag">Google Apps Script</span>
-          <span class="tool-tag">HTML/CSS</span>
+      <div class="tool-box fade d1">
+        <h4>AI &amp; Development</h4>
+        <div class="tool-pills">
+          <span class="pill">Claude AI</span><span class="pill">ChatGPT</span><span class="pill">WordPress</span><span class="pill">Google Apps Script</span><span class="pill">HTML/CSS</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════ WHY ME ════════════════════ -->
-<section class="why-section" id="why">
-  <div class="section-inner">
-    <div class="section-label">The Difference</div>
-    <h2 class="section-title">Why clients keep coming back.</h2>
-    <p class="section-desc">What sets my work apart from the usual agency pitch.</p>
+<!-- ════════════ WHY ME ════════════ -->
+<section class="why sec" id="why">
+  <div class="sec-inner">
+    <div class="sec-tag fade">The Difference</div>
+    <h2 class="sec-heading fade d1">Why clients keep coming back.</h2>
+    <p class="sec-sub fade d2">What sets my work apart from the usual pitch.</p>
     <div class="why-grid">
-      <div class="why-card reveal">
-        <h3><span>🏗</span> Systems, Not Just Tactics</h3>
-        <p>I build complete marketing ecosystems — CRM to content to automation — not disconnected one-off campaigns. Everything connects and compounds.</p>
+      <div class="why-card fade">
+        <h3><span>&#127959;</span> Systems, Not Tactics</h3>
+        <p>I build complete marketing ecosystems &mdash; CRM to content to automation &mdash; not disconnected one-off campaigns. Everything connects and compounds.</p>
       </div>
-      <div class="why-card reveal reveal-delay-1">
-        <h3><span>🌍</span> Africa + International</h3>
+      <div class="why-card fade d1">
+        <h3><span>&#127758;</span> Africa + International</h3>
         <p>Deep understanding of Nigerian and West African markets, with hands-on experience running campaigns for UK and North American audiences simultaneously.</p>
       </div>
-      <div class="why-card reveal reveal-delay-2">
-        <h3><span>📊</span> Data Over Opinions</h3>
-        <p>Every strategy is backed by analytics. Weekly performance reports, proper tracking setup, and transparent KPIs — you always know what's working and why.</p>
+      <div class="why-card fade d2">
+        <h3><span>&#128202;</span> Data Over Opinions</h3>
+        <p>Every strategy is backed by analytics. Weekly performance reports, proper tracking setup, and transparent KPIs &mdash; you always know what's working.</p>
       </div>
-      <div class="why-card reveal reveal-delay-3">
-        <h3><span>🤖</span> Automation-First</h3>
-        <p>I actively build workflows that save hours and scale output. From n8n job scrapers to AI content pipelines — if it can be automated, I've probably built it.</p>
+      <div class="why-card fade d3">
+        <h3><span>&#129302;</span> Automation-First</h3>
+        <p>I actively build workflows that save hours and scale output. From n8n job scrapers to AI content pipelines &mdash; if it can be automated, I've built it.</p>
       </div>
-      <div class="why-card reveal">
-        <h3><span>🎯</span> Multi-Brand Veteran</h3>
+      <div class="why-card fade">
+        <h3><span>&#127919;</span> Multi-Brand Veteran</h3>
         <p>I've managed 6+ brand portfolios simultaneously across different industries and geographies. Context-switching at speed is second nature.</p>
       </div>
-      <div class="why-card reveal reveal-delay-1">
-        <h3><span>🔄</span> Full Lifecycle</h3>
-        <p>From strategy deck to CRM implementation to running the campaigns and reporting the results — I own the process end to end.</p>
+      <div class="why-card fade d1">
+        <h3><span>&#128260;</span> Full Lifecycle</h3>
+        <p>From strategy deck to CRM implementation to running campaigns and reporting results &mdash; I own the process end to end.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════ CTA ════════════════════ -->
-<section class="cta-section" id="contact">
-  <div class="section-label">Let's Work Together</div>
-  <h2>Ready to build a marketing<br>system that actually works?</h2>
-  <p>Whether you need a complete digital strategy, CRM implementation, or someone to turn your marketing into a growth engine — let's talk.</p>
-  <a href="#" id="ctaBtn" class="cta-btn">Get In Touch →</a>
-  <div class="cta-contact">
-    <a href="#" id="ctaEmail"></a> &nbsp;&nbsp;·&nbsp;&nbsp;
-    <a href="https://www.linkedin.com/in/akinloye-okunola-279695191/" target="_blank">LinkedIn</a> &nbsp;&nbsp;·&nbsp;&nbsp;
+<!-- ════════════ CTA ════════════ -->
+<section class="cta sec" id="contact">
+  <div class="sec-tag fade">Let's Work Together</div>
+  <h2 class="fade d1">Ready to build a marketing<br>system that actually works?</h2>
+  <p class="fade d2">Whether you need a complete digital strategy, CRM implementation, or someone to turn your marketing into a growth engine.</p>
+  <a href="#" id="cta-main" class="cta-btn fade d3">Get In Touch &#8594;</a>
+  <div class="cta-links fade d4">
+    <a href="#" id="cta-addr"></a>
+    <span> &middot; </span>
+    <a href="https://www.linkedin.com/in/akinloye-okunola-279695191/" target="_blank">LinkedIn</a>
+    <span> &middot; </span>
     Lagos, Nigeria
   </div>
 </section>
+
+<footer>&#169; 2026 Okunola David Akinloye. All rights reserved.</footer>
+
 <script>
+// === CONTACT INFO (char codes to bypass Cloudflare) ===
 (function(){
-  var c=[100,97,118,105,100,97,107,105,110,54,64,103,109,97,105,108,46,99,111,109];
-  var e=c.map(function(x){return String.fromCharCode(x)}).join('');
-  var p=[109,97,105,108,116,111,58];
-  var m=p.map(function(x){return String.fromCharCode(x)}).join('');
-  document.getElementById('ctaBtn').href=m+e;
-  var lnk=document.getElementById('ctaEmail');
-  lnk.href=m+e;lnk.textContent=e;
+  var a=[100,97,118,105,100,97,107,105,110,54];
+  var b=[103,109,97,105,108,46,99,111,109];
+  var s=String.fromCharCode;
+  var addr=a.map(s).join('')+s(64)+b.map(s).join('');
+  var proto=[109,97,105,108,116,111,58].map(s).join('');
+  var el1=document.getElementById('cta-main');
+  var el2=document.getElementById('cta-addr');
+  if(el1)el1.href=proto+addr;
+  if(el2){el2.href=proto+addr;el2.textContent=addr;}
 })();
+
+// === SCROLL PROGRESS ===
+var bar=document.getElementById('progress');
+window.addEventListener('scroll',function(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  bar.style.width=(window.scrollY/h*100)+'%';
+});
+
+// === NAV SCROLL STATE ===
+var navEl=document.getElementById('topnav');
+window.addEventListener('scroll',function(){
+  navEl.classList.toggle('scrolled',window.scrollY>30);
+});
+
+// === SCROLL REVEAL ===
+var fades=document.querySelectorAll('.fade');
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}
+  });
+},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+fades.forEach(function(el){io.observe(el);});
+
+// Fallback: force show everything after 2s in case observer fails
+setTimeout(function(){fades.forEach(function(el){el.classList.add('show');});},2000);
+
+// === SMOOTH SCROLL ===
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var t=document.querySelector(this.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+});
 </script>
-
-<!-- Footer -->
-<footer>
-  © 2026 Okunola David Akinloye. All rights reserved.
-</footer>
-
-<script>
-// Scroll progress
-const prog = document.getElementById('scrollProgress');
-window.addEventListener('scroll', () => {
-  const h = document.documentElement.scrollHeight - window.innerHeight;
-  prog.style.width = (window.scrollY / h * 100) + '%';
-});
-
-// Nav hide/show on scroll
-let lastY = 0;
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  nav.classList.toggle('hidden', y > lastY && y > 100);
-  nav.classList.toggle('scrolled', y > 20);
-  lastY = y;
-});
-
-// Reveal on scroll — with fallback for deploy environments
-const reveals = document.querySelectorAll('.reveal');
-
-// Fallback: if IntersectionObserver fails or elements are already in view, force visible
-function forceRevealAll() { reveals.forEach(el => el.classList.add('visible')); }
-setTimeout(forceRevealAll, 1500); // safety net
-
-const observer = new IntersectionObserver
+</body>
+</html>
