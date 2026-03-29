@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okunola David Akinloye — Digital Marketing Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0D1117;
+  --paper:#FAFAF7;
+  --cream:#F5F0E8;
+  --accent:#C4553A;
+  --accent-glow:#E8714A;
+  --teal:#1A6B5C;
+  --teal-light:#E6F2EF;
+  --slate:#4A5568;
+  --mist:#E2E0DC;
+  --ghost:#B8B5AE;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ─── NOISE TEXTURE ─── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ─── SCROLL PROGRESS ─── */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--teal));z-index:1000;transition:width .1s linear;width:0}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(250,250,247,.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.06);
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+nav.hidden{transform:translateY(-100%)}
+nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,.06)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:16px 40px;display:flex;justify-content:space-between;align-items:center}
+.nav-brand{font-family:var(--serif);font-weight:900;font-size:1.1rem;letter-spacing:-.02em;color:var(--ink)}
+.nav-brand span{color:var(--accent)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--slate);font-size:.82rem;font-weight:500;letter-spacing:.03em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--ink);color:var(--paper);
+  padding:8px 20px;border-radius:100px;font-size:.8rem;font-weight:600;
+  text-decoration:none;letter-spacing:.02em;
+  transition:all .25s ease;
+}
+.nav-cta:hover{background:var(--accent);transform:translateY(-1px);box-shadow:0 4px 16px rgba(196,85,58,.3)}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:120px 40px 80px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;
+  background:radial-gradient(circle,rgba(196,85,58,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-10%;left:-5%;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(26,107,92,.05) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-grid{
+  max-width:1200px;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-eyebrow::before{content:'';width:28px;height:1.5px;background:var(--accent)}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(2.6rem,5vw,4.2rem);font-weight:900;
+  line-height:1.08;letter-spacing:-.03em;color:var(--ink);margin-bottom:20px;
+}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:1.05rem;line-height:1.7;color:var(--slate);max-width:480px;margin-bottom:32px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--ink);color:var(--paper);
+  padding:14px 32px;border-radius:100px;font-size:.88rem;font-weight:600;
+  text-decoration:none;letter-spacing:.01em;
+  transition:all .3s ease;border:2px solid var(--ink);
+}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 30px rgba(196,85,58,.25)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--ink);
+  padding:14px 32px;border-radius:100px;font-size:.88rem;font-weight:600;
+  text-decoration:none;letter-spacing:.01em;
+  border:2px solid var(--mist);transition:all .3s ease;
+}
+.btn-secondary:hover{border-color:var(--ink);transform:translateY(-2px)}
+
+/* Hero right — Stats cards */
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat-card{
+  background:white;border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:28px 24px;
+  transition:all .35s ease;position:relative;overflow:hidden;
+}
+.stat-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--teal));
+  transform:scaleX(0);transform-origin:left;transition:transform .4s ease;
+}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.stat-card:hover::after{transform:scaleX(1)}
+.stat-num{font-family:var(--serif);font-size:2.4rem;font-weight:900;color:var(--ink);line-height:1}
+.stat-label{font-size:.78rem;color:var(--ghost);margin-top:6px;letter-spacing:.02em;font-weight:500}
+
+/* ─── SECTION COMMONS ─── */
+section{padding:100px 40px}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:10px;
+}
+.section-label::before{content:'';width:20px;height:1.5px;background:var(--accent)}
+.section-title{
+  font-family:var(--serif);font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;
+  line-height:1.12;letter-spacing:-.02em;color:var(--ink);margin-bottom:16px;
+}
+.section-desc{font-size:1rem;color:var(--slate);max-width:560px;line-height:1.7;margin-bottom:48px}
+
+/* ─── SERVICES ─── */
+.services-section{background:var(--ink);color:var(--paper)}
+.services-section .section-label{color:var(--accent-glow)}
+.services-section .section-label::before{background:var(--accent-glow)}
+.services-section .section-title{color:var(--paper)}
+.services-section .section-desc{color:rgba(255,255,255,.55)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.service-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:32px 28px;transition:all .35s ease;position:relative;overflow:hidden;
+}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),transparent);opacity:0;transition:opacity .3s;
+}
+.service-card:hover{background:rgba(255,255,255,.08);transform:translateY(-3px)}
+.service-card:hover::before{opacity:1}
+.service-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-glow));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;margin-bottom:18px;color:white;font-weight:700;
+}
+.service-card h3{font-family:var(--serif);font-size:1.15rem;font-weight:700;margin-bottom:10px;color:var(--paper)}
+.service-card p{font-size:.86rem;line-height:1.65;color:rgba(255,255,255,.5)}
+
+/* ─── CASE STUDIES ─── */
+.case-studies-section{background:var(--paper)}
+.cases-container{display:flex;flex-direction:column;gap:32px}
+.case-card{
+  background:white;border:1px solid rgba(0,0,0,.06);border-radius:20px;
+  overflow:hidden;transition:all .4s ease;
+  display:grid;grid-template-columns:320px 1fr;
+}
+.case-card:hover{box-shadow:0 20px 60px rgba(0,0,0,.08);transform:translateY(-3px)}
+.case-visual{
+  padding:40px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  position:relative;overflow:hidden;
+}
+.case-visual.v1{background:linear-gradient(135deg,#1a1a2e,#16213e)}
+.case-visual.v2{background:linear-gradient(135deg,#0f3443,#34e89e20)}
+.case-visual.v3{background:linear-gradient(135deg,#2d1b4e,#562b7c)}
+.case-visual.v4{background:linear-gradient(135deg,#1b4332,#2d6a4f)}
+.case-visual.v5{background:linear-gradient(135deg,#3d0c02,#c4553a)}
+.case-visual.v6{background:linear-gradient(135deg,#0d1117,#21262d)}
+.case-num{
+  font-family:var(--serif);font-size:5rem;font-weight:900;color:rgba(255,255,255,.08);
+  position:absolute;top:10px;right:20px;line-height:1;
+}
+.case-client{
+  font-family:var(--serif);font-size:1.5rem;font-weight:700;color:white;text-align:center;
+  line-height:1.25;z-index:1;
+}
+.case-role{
+  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);
+  margin-top:10px;z-index:1;
+}
+.case-content{padding:40px}
+.case-tag{
+  display:inline-block;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);background:rgba(196,85,58,.08);
+  padding:4px 12px;border-radius:100px;margin-bottom:14px;
+}
+.case-content h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;line-height:1.3;margin-bottom:12px}
+.case-content .challenge{font-size:.88rem;color:var(--slate);line-height:1.65;margin-bottom:16px}
+.deliverables{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.deliverable{
+  font-size:.72rem;font-weight:600;letter-spacing:.03em;
+  padding:5px 14px;border-radius:100px;
+  background:var(--teal-light);color:var(--teal);
+}
+.case-metrics{display:flex;gap:24px;padding-top:16px;border-top:1px solid rgba(0,0,0,.06)}
+.metric{text-align:center}
+.metric-val{font-family:var(--serif);font-size:1.4rem;font-weight:900;color:var(--ink)}
+.metric-lbl{font-size:.68rem;color:var(--ghost);margin-top:2px;letter-spacing:.02em}
+
+/* ─── TOOLS ─── */
+.tools-section{background:var(--cream)}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.tool-group{background:white;border-radius:14px;padding:24px;border:1px solid rgba(0,0,0,.04)}
+.tool-group h4{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;
+}
+.tool-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tool-tag{
+  font-size:.76rem;font-weight:500;padding:4px 12px;border-radius:6px;
+  background:var(--paper);color:var(--slate);border:1px solid rgba(0,0,0,.06);
+}
+
+/* ─── WHY ME ─── */
+.why-section{background:var(--paper)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.why-card{
+  padding:32px;border-radius:16px;border:1px solid rgba(0,0,0,.06);
+  background:white;transition:all .35s ease;position:relative;
+}
+.why-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.06)}
+.why-card h3{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.why-card h3 span{color:var(--accent);font-size:1.4rem}
+.why-card p{font-size:.86rem;line-height:1.65;color:var(--slate)}
+
+/* ─── CTA ─── */
+.cta-section{
+  background:var(--ink);padding:100px 40px;text-align:center;position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'';position:absolute;top:50%;left:50%;width:800px;height:800px;
+  background:radial-gradient(circle,rgba(196,85,58,.12) 0%,transparent 60%);
+  transform:translate(-50%,-50%);pointer-events:none;
+}
+.cta-section .section-label{justify-content:center;color:var(--accent-glow)}
+.cta-section .section-label::before{background:var(--accent-glow)}
+.cta-section h2{
+  font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:900;
+  color:var(--paper);margin-bottom:16px;position:relative;
+}
+.cta-section p{font-size:1rem;color:rgba(255,255,255,.5);margin-bottom:36px;max-width:500px;margin-inline:auto;line-height:1.7;position:relative}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:white;
+  padding:16px 40px;border-radius:100px;font-size:.95rem;font-weight:700;
+  text-decoration:none;letter-spacing:.01em;
+  transition:all .3s ease;position:relative;
+}
+.cta-btn:hover{background:var(--accent-glow);transform:translateY(-2px);box-shadow:0 10px 40px rgba(196,85,58,.35)}
+.cta-contact{margin-top:28px;font-size:.85rem;color:rgba(255,255,255,.35);position:relative}
+.cta-contact a{color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s}
+.cta-contact a:hover{color:var(--accent-glow)}
+
+/* ─── FOOTER ─── */
+footer{padding:24px 40px;text-align:center;font-size:.75rem;color:var(--ghost);border-top:1px solid rgba(0,0,0,.06)}
+
+/* ─── ANIMATIONS ─── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ─── MOBILE ─── */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:40px;text-align:center}
+  .hero-sub{margin-inline:auto}
+  .hero-actions{justify-content:center}
+  .hero-eyebrow{justify-content:center}
+  .case-card{grid-template-columns:1fr}
+  .case-visual{padding:32px;min-height:160px}
+  .nav-links{display:none}
+  section{padding:60px 20px}
+  .nav-inner{padding:14px 20px}
+  .hero{padding:100px 20px 60px}
+}
+@media(max-width:600px){
+  .hero-stats{grid-template-columns:1fr 1fr;gap:10px}
+  .stat-card{padding:20px 16px}
+  .stat-num{font-size:1.8rem}
+  .case-metrics{flex-wrap:wrap;gap:16px}
+  .case-content{padding:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">Loye<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#why">Why Me</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Let's Talk →</a>
+  </div>
+</nav>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">Lagos, Nigeria</div>
+      <h1>I build marketing systems that <em>actually grow</em> businesses.</h1>
+      <p class="hero-sub">10+ years turning CRM pipelines, paid media, and automation into real revenue — across African and international markets.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary">See My Work ↓</a>
+        <a href="#contact" class="btn-secondary">Hire Me</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card reveal">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-1">
+        <div class="stat-num">68K+</div>
+        <div class="stat-label">Audience Built</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Brands Managed</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-3">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Continents Served</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ SERVICES ════════════════════ -->
+<section class="services-section" id="services">
+  <div class="section-inner">
+    <div class="section-label">What I Do</div>
+    <h2 class="section-title">Full-funnel marketing,<br>not just tactics.</h2>
+    <p class="section-desc">I don't just run ads. I build the entire ecosystem — CRM, content, automation, and analytics — so your marketing runs like a machine.</p>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">⚡</div>
+        <h3>Digital Marketing Strategy</h3>
+        <p>90-day strategic roadmaps with budget planning, channel selection, and KPI frameworks tailored for African and international markets.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">🔧</div>
+        <h3>CRM Implementation</h3>
+        <p>Microsoft Dynamics 365 and Zoho CRM setup — audience segmentation, automated customer journeys, email sequences, and pipeline management.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">📈</div>
+        <h3>Performance Marketing</h3>
+        <p>Meta Ads, Google Ads, Google UAC, and LinkedIn Ads. Budget optimization, A/B testing, audience targeting, and conversion tracking at scale.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">🔍</div>
+        <h3>SEO & Content</h3>
+        <p>Keyword research, competitive analysis, on-page optimization, and internal linking strategies. SEO-driven blog content that ranks and converts.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🤖</div>
+        <h3>Marketing Automation</h3>
+        <p>Automated workflows via n8n, Zapier, and Power Automate — from job scrapers to LinkedIn posting pipelines to CRM-triggered nurture sequences.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">💼</div>
+        <h3>LinkedIn Thought Leadership</h3>
+        <p>Executive ghostwriting with structured playbooks. Research-driven content, engagement frameworks, and posting cadence optimization.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">📱</div>
+        <h3>Social Media Management</h3>
+        <p>Multi-brand social media operations across LinkedIn, Instagram, Facebook, and Twitter. Content calendars, community management, and analytics reporting.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">📄</div>
+        <h3>Resume Writing & Career Services</h3>
+        <p>ATS-optimized resume writing and LinkedIn profile optimization through Career Clarity Resumes. Serving marketing and tech professionals globally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CASE STUDIES ════════════════════ -->
+<section class="case-studies-section" id="work">
+  <div class="section-inner">
+    <div class="section-label">Selected Work</div>
+    <h2 class="section-title">Projects that moved the needle.</h2>
+    <p class="section-desc">Real campaigns, real systems, real results. Each project showcases a different dimension of what I bring to the table.</p>
+
+    <div class="cases-container">
+
+      <!-- Case 1: TEPS -->
+      <div class="case-card reveal">
+        <div class="case-visual v1">
+          <div class="case-num">01</div>
+          <div class="case-client">TEPS</div>
+          <div class="case-role">Full Digital Build</div>
+        </div>
+        <div class="case-content">
+          <span class="case-tag">Event Management Platform</span>
+          <h3>Built an entire digital marketing infrastructure from scratch</h3>
+          <p class="challenge">TEPS needed everything — strategy, CRM, ads, content, and brand assets. I delivered a complete 90-day marketing ecosystem with a ₦2M+ budget, including Zoho CRM implementation, Meta ad campaigns for Wild West Throwdown 3.0, social content calendars, SEO blog content, and branded design assets.</p>
+          <div class="deliverables">
+            <span class="deliverable">90-Day Strategy</span>
+            <span class="deliverable">Zoho CRM Setup</span>
+            <span class="deliverable">Meta Ads</span>
+            <span class="deliverable">SEO Content</span>
+            <span class="deliverable">Brand Assets</span>
+            <span class="deliverable">Team Training</span>
+          </div>
+          <div class="case-metrics">
+            <div class="metric"><div class="metric-val">₦2M+</div><div class="metric-lbl">Budget Managed</div></div>
+            <div class="metric"><div class="metric-val">3</div><div class="metric-lbl">Platforms</div></div>
+            <div class="metric"><div class="metric-val">90</div><div class="metric-lbl">Day Roadmap</div></div>
+            <div class="metric"><div class="metric-val">Full</div><div class="metric-lbl">CRM Build</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 2: Reliance -->
+      <div class="case-card reveal">
+        <div class="case-visual v2">
+          <div class="case-num">02</div>
+          <div class="case-client">Reliance Infosystems</div>
+          <div class="case-role">Digital Marketing Executive</div>
+        </div>
+        <div class="case-content">
+          <span class="case-tag">B2B Technology — Multi-Entity</span>
+          <h3>Led digital marketing across 6+ business entities on 3 continents</h3>
+          <p class="challenge">Managed the Digital Success DM Team across Reliance Global, UK, and North America, plus Cloudware Africa, Digitank Africa, PlungeSmile, Careerdemy, and Modiva. Ran Dynamics 365 CRM, enriched 1,000+ leads monthly, built a 222-link internal linking map for the UK site, and managed 68K+ social followers.</p>
+          <div class="deliverables">
+            <span class="deliverable">Dynamics 365 CRM</span>
+            <span class="deliverable">Lead Enrichment</span>
+            <span class="deliverable">SEO Strategy</span>
+            <span class="deliverable">Social Media (6 Brands)</span>
+            <span class="deliverable">Internal Linking</span>
+            <span class="deliverable">Weekly Analytics</span>
+          </div>
+          <div class="case-metrics">
+            <div class="metric"><div class="metric-val">68K+</div><div class="metric-lbl">Audience</div></div>
+            <div class="metric"><div class="metric-val">6+</div><div class="metric-lbl">Entities</div></div>
+            <div class="metric"><div class="metric-val">1K+</div><div class="metric-lbl">Leads/Month</div></div>
+            <div class="metric"><div class="metric-val">222</div><div class="metric-lbl">Links Mapped</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 3: Solutions MGA -->
+      <div class="case-card reveal">
+        <div class="case-visual v3">
+          <div class="case-num">03</div>
+          <div class="case-client">Solutions MGA</div>
+          <div class="case-role">LinkedIn Strategist</div>
+        </div>
+        <div class="case-content">
+          <span class="case-tag">IT Consulting — Thought Leadership</span>
+          <h3>Positioned a Fortune 500-serving CEO as a LinkedIn thought leader</h3>
+          <p class="challenge">Built a structured LinkedIn content engine for Tom McDonald, CEO of a Cincinnati-based IT firm serving P&G, LexisNexis, USDA, and Kroger. Developed a playbook (50% polls, 30% educational, 20% contrarian), created carousel designs, and automated weekly content production with AI-assisted workflows.</p>
+          <div class="deliverables">
+            <span class="deliverable">Content Playbook</span>
+            <span class="deliverable">Ghostwriting</span>
+            <span class="deliverable">Carousel Design</span>
+            <span class="deliverable">AI Automation</span>
+            <span class="deliverable">A/B Testing</span>
+          </div>
+          <div class="case-metrics">
+            <div class="metric"><div class="metric-val">Weekly</div><div class="metric-lbl">Publishing</div></div>
+            <div class="metric"><div class="metric-val">3</div><div class="metric-lbl">Content Pillars</div></div>
+            <div class="metric"><div class="metric-val">F500</div><div class="metric-lbl">Client Base</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 4: LincRide -->
+      <div class="case-card reveal">
+        <div class="case-visual v4">
+          <div class="case-num">04</div>
+          <div class="case-client">LincRide</div>
+          <div class="case-role">Marketing Strategy</div>
+        </div>
+        <div class="case-content">
+          <span class="case-tag">Carpooling Platform — Lagos</span>
+          <h3>Comprehensive marketing strategy that advanced to final interview</h3>
+          <p class="challenge">Built a full marketing strategy for Lagos-based carpooling startup including pitch deck, Excel financial model with CAC/LTV projections, rider and driver acquisition strategies, trust-and-safety marketing framework, and phased content strategy across Instagram, TikTok, Facebook, and WhatsApp.</p>
+          <div class="deliverables">
+            <span class="deliverable">Pitch Deck</span>
+            <span class="deliverable">Financial Model</span>
+            <span class="deliverable">Acquisition Strategy</span>
+            <span class="deliverable">Trust Framework</span>
+            <span class="deliverable">Content Strategy</span>
+          </div>
+          <div class="case-metrics">
+            <div class="metric"><div class="metric-val">Final</div><div class="metric-lbl">Round Reached</div></div>
+            <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Deliverables</div></div>
+            <div class="metric"><div class="metric-val">4</div><div class="metric-lbl">Channels Planned</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 5: Career Clarity -->
+      <div class="case-card reveal">
+        <div class="case-visual v5">
+          <div class="case-num">05</div>
+          <div class="case-client">Career Clarity Resumes</div>
+          <div class="case-role">Founder</div>
+        </div>
+        <div class="case-content">
+          <span class="case-tag">Professional Services — Own Business</span>
+          <h3>Resume writing service with AI-powered client workflows</h3>
+          <p class="challenge">Built and run a professional resume writing service offering ATS-optimized resumes, LinkedIn profile optimization, and career transition support. Automated the proposal workflow using AI-assisted prompts for faster client turnaround. Serving marketing and tech professionals globally.</p>
+          <div class="deliverables">
+            <span class="deliverable">ATS Optimization</span>
+            <span class="deliverable">LinkedIn Profiles</span>
+            <span class="deliverable">Career Transitions</span>
+            <span class="deliverable">Automated Proposals</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 6: n8n Automation -->
+      <div class="case-card reveal">
+        <div class="case-visual v6">
+          <div class="case-num">06</div>
+          <div class="case-client">Job Bot Pipeline</div>
+          <div class="case-role">Automation Build</div>
+        </div>
+        <div class="case-content">
+          <span class="case-tag">Marketing Automation — n8n</span>
+          <h3>Fully automated job scraping & Twitter posting pipeline</h3>
+          <p class="challenge">Designed and built an end-to-end n8n workflow that scrapes remote tech jobs from RemoteOK, We Work Remotely, and LinkedIn (via Apify), deduplicates via Google Sheets, applies keyword/location filters, and auto-posts to Twitter/X on a scheduled cadence.</p>
+          <div class="deliverables">
+            <span class="deliverable">n8n Workflow</span>
+            <span class="deliverable">Web Scraping</span>
+            <span class="deliverable">Deduplication</span>
+            <span class="deliverable">Twitter API</span>
+            <span class="deliverable">Google Sheets DB</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ TOOLS ════════════════════ -->
+<section class="tools-section" id="tools">
+  <div class="section-inner">
+    <div class="section-label">My Stack</div>
+    <h2 class="section-title">Tools I work with daily.</h2>
+    <p class="section-desc">The platforms and technologies behind the results.</p>
+    <div class="tools-grid">
+      <div class="tool-group reveal">
+        <h4>CRM & Automation</h4>
+        <div class="tool-tags">
+          <span class="tool-tag">Dynamics 365</span>
+          <span class="tool-tag">Zoho CRM</span>
+          <span class="tool-tag">n8n</span>
+          <span class="tool-tag">Zapier</span>
+          <span class="tool-tag">Power Automate</span>
+          <span class="tool-tag">Mailchimp</span>
+        </div>
+      </div>
+      <div class="tool-group reveal reveal-delay-1">
+        <h4>Paid Media</h4>
+        <div class="tool-tags">
+          <span class="tool-tag">Meta Ads</span>
+          <span class="tool-tag">Google Ads</span>
+          <span class="tool-tag">Google UAC</span>
+          <span class="tool-tag">LinkedIn Ads</span>
+        </div>
+      </div>
+      <div class="tool-group reveal reveal-delay-2">
+        <h4>SEO & Analytics</h4>
+        <div class="tool-tags">
+          <span class="tool-tag">SEMrush</span>
+          <span class="tool-tag">Google Search Console</span>
+          <span class="tool-tag">Google Analytics</span>
+          <span class="tool-tag">Microsoft Clarity</span>
+        </div>
+      </div>
+      <div class="tool-group reveal reveal-delay-3">
+        <h4>Lead Generation</h4>
+        <div class="tool-tags">
+          <span class="tool-tag">LinkedIn Sales Nav</span>
+          <span class="tool-tag">ZoomInfo</span>
+          <span class="tool-tag">Snovio</span>
+          <span class="tool-tag">Apify</span>
+          <span class="tool-tag">Apollo.io</span>
+        </div>
+      </div>
+      <div class="tool-group reveal">
+        <h4>Social & Content</h4>
+        <div class="tool-tags">
+          <span class="tool-tag">Hootsuite</span>
+          <span class="tool-tag">Canva</span>
+          <span class="tool-tag">Buffer</span>
+          <span class="tool-tag">Google Tag Manager</span>
+          <span class="tool-tag">Firebase</span>
+        </div>
+      </div>
+      <div class="tool-group reveal reveal-delay-1">
+        <h4>AI & Development</h4>
+        <div class="tool-tags">
+          <span class="tool-tag">Claude AI</span>
+          <span class="tool-tag">ChatGPT</span>
+          <span class="tool-tag">WordPress</span>
+          <span class="tool-tag">Google Apps Script</span>
+          <span class="tool-tag">HTML/CSS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ WHY ME ════════════════════ -->
+<section class="why-section" id="why">
+  <div class="section-inner">
+    <div class="section-label">The Difference</div>
+    <h2 class="section-title">Why clients keep coming back.</h2>
+    <p class="section-desc">What sets my work apart from the usual agency pitch.</p>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <h3><span>🏗</span> Systems, Not Just Tactics</h3>
+        <p>I build complete marketing ecosystems — CRM to content to automation — not disconnected one-off campaigns. Everything connects and compounds.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <h3><span>🌍</span> Africa + International</h3>
+        <p>Deep understanding of Nigerian and West African markets, with hands-on experience running campaigns for UK and North American audiences simultaneously.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <h3><span>📊</span> Data Over Opinions</h3>
+        <p>Every strategy is backed by analytics. Weekly performance reports, proper tracking setup, and transparent KPIs — you always know what's working and why.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <h3><span>🤖</span> Automation-First</h3>
+        <p>I actively build workflows that save hours and scale output. From n8n job scrapers to AI content pipelines — if it can be automated, I've probably built it.</p>
+      </div>
+      <div class="why-card reveal">
+        <h3><span>🎯</span> Multi-Brand Veteran</h3>
+        <p>I've managed 6+ brand portfolios simultaneously across different industries and geographies. Context-switching at speed is second nature.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <h3><span>🔄</span> Full Lifecycle</h3>
+        <p>From strategy deck to CRM implementation to running the campaigns and reporting the results — I own the process end to end.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CTA ════════════════════ -->
+<section class="cta-section" id="contact">
+  <div class="section-label">Let's Work Together</div>
+  <h2>Ready to build a marketing<br>system that actually works?</h2>
+  <p>Whether you need a complete digital strategy, CRM implementation, or someone to turn your marketing into a growth engine — let's talk.</p>
+  <a href="mailto:davidakin6@gmail.com" class="cta-btn">Get In Touch →</a>
+  <div class="cta-contact">
+    <a href="mailto:davidakin6@gmail.com">davidakin6@gmail.com</a> &nbsp;&nbsp;·&nbsp;&nbsp;
+    <a href="https://www.linkedin.com/in/akinloye-okunola-279695191/" target="_blank">LinkedIn</a> &nbsp;&nbsp;·&nbsp;&nbsp;
+    Lagos, Nigeria
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  © 2026 Okunola David Akinloye. All rights reserved.
+</footer>
+
+<script>
+// Scroll progress
+const prog = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (window.scrollY / h * 100) + '%';
+});
+
+// Nav hide/show on scroll
+let lastY = 0;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.classList.toggle('hidden', y > lastY && y > 100);
+  nav.classList.toggle('scrolled', y > 20);
+  lastY = y;
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Smooth scroll for nav links
+document.querySele
