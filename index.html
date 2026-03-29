@@ -675,13 +675,24 @@ footer{padding:24px 40px;text-align:center;font-size:.75rem;color:var(--ghost);b
   <div class="section-label">Let's Work Together</div>
   <h2>Ready to build a marketing<br>system that actually works?</h2>
   <p>Whether you need a complete digital strategy, CRM implementation, or someone to turn your marketing into a growth engine — let's talk.</p>
-  <a href="mailto:davidakin6@gmail.com" class="cta-btn">Get In Touch →</a>
+  <a href="#" id="ctaBtn" class="cta-btn">Get In Touch →</a>
   <div class="cta-contact">
-    <a href="mailto:davidakin6@gmail.com">davidakin6@gmail.com</a> &nbsp;&nbsp;·&nbsp;&nbsp;
+    <a href="#" id="ctaEmail"></a> &nbsp;&nbsp;·&nbsp;&nbsp;
     <a href="https://www.linkedin.com/in/akinloye-okunola-279695191/" target="_blank">LinkedIn</a> &nbsp;&nbsp;·&nbsp;&nbsp;
     Lagos, Nigeria
   </div>
 </section>
+<script>
+// Build email via JS so Cloudflare can't obfuscate it
+(function(){
+  var u='davidakin6',d='gmail.com',e=u+'@'+d;
+  var btn=document.getElementById('ctaBtn');
+  var lnk=document.getElementById('ctaEmail');
+  btn.href='mai'+'lto:'+e;
+  lnk.href='mai'+'lto:'+e;
+  lnk.textContent=e;
+})();
+</script>
 
 <!-- Footer -->
 <footer>
@@ -706,23 +717,11 @@ window.addEventListener('scroll', () => {
   lastY = y;
 });
 
-// Reveal on scroll
+// Reveal on scroll — with fallback for deploy environments
 const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-reveals.forEach(el => observer.observe(el));
 
-// Smooth scroll for nav links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-</script>
-</body>
-</html>
+// Fallback: if IntersectionObserver fails or elements are already in view, force visible
+function forceRevealAll() { reveals.forEach(el => el.classList.add('visible')); }
+setTimeout(forceRevealAll, 1500); // safety net
+
+const observer = new IntersectionObserver
